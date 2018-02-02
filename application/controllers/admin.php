@@ -9,32 +9,82 @@ class Admin extends CI_Controller {
 		}
 	
 	public function index(){
-		$this->load->view('index');
+			$this->load->database();
+		$jumlah_data = $this->m_crud->jumlah_data();
+		$this->load->library('pagination');
+
+		$config['base_url'] = base_url().'index.php/admin/index/';
+		$config['total_rows'] = $jumlah_data;
+		$config['per_page'] = 5;
+
+		$config['full_tag_open'] = '<ul class="pagination">';
+		$config['full_tag_close'] = '</ul>';
+
+		$config['first_tag_open'] = '<li>';
+		$config['last_tag_open'] = '<li>';
+
+		$config['next_tag_open'] = '<li>';
+		$config['prev_tag_open'] = '<li>';
+
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+
+		$config['first_tag_close'] = '</li>';
+		$config['last_tag_close'] = '</li>';
+
+		$config['next_tag_close'] = '</li>';
+		$config['prev_tag_close'] = '</li>';
+
+		$config['cur_tag_open'] = "<li class=\"active\"><span><b>";
+		$config['cur_tag_close'] = "</b></span></li>";
+
+		$this->pagination->initialize($config);
+
+		$from = $this->uri->segment(3);
+		$this->pagination->initialize($config);		
+		$data['user'] = $this->m_crud->data($config['per_page'],$from);
+
+		
+		$this->load->view('v_headeradmin');
+		$this->load->view('admin', $data);
+		$this->load->view('v_footeradmin');
 		}
 
-
-		function tampil(){
-			$data['rute'] = $this->m_crud->tampil_data()->result();
-			$this->load->view('tampil',$data);
-		}
-
-		function tambah_aksi(){
-			$from = $this->input->post('from');
-			$to = $this->input->post('to');
-			$depart = $this->input->post('depart');
-			$price = $this->input->post('price');
-			$passenger = $this->input->post('passenger');
-
+	public function tambah(){
+			$op = $this->input->post('op');
+			$id = $this->input->post('id');
+			$username = $this->input->post('username');
+			$fullname = $this->input->post('fullname');
+			$password = $this->input->post('password');
+			
 			$data = array(
-				'rute_from' => $from,
-				'rute_to' => $to,
-				'depart_at' => $depart,
-				'price' => $price,
-				'passenger' => $passenger
+				'username' => $username,
+				'fullname' => $fullname,
+				'password' => md5($password)
 			);
-			$this->m_crud->input_data($data, 'rute');
-			redirect('admin/index');
+
+		if($op=="tambah"){
+			$this->m_crud->tambah($data);
 		}
+		else{
+			$this->m_crud->update($id,$data);
+		}
+	
+		redirect('admin');
+		}
+
+	public function hapus($id){
+
+		$this->m_crud->hapus($id);
+		redirect('admin');
+	}
+
+	public function edit($id){
+		$data['op'] = 'edit';
+		$data['sql'] = $this->m_crud->edit($id);
+
+		$this->load->view('v_edit',$data);	
+	}
 
 
 
