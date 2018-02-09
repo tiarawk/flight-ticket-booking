@@ -40,7 +40,7 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 
-
+<div class="wrapper">
   <header class="main-header">
     <!-- Logo -->
     <a href="index2.html" class="logo">
@@ -336,7 +336,7 @@
         
 
         <li>
-          <a href="pages/widgets.html">
+          <a href="<?php echo base_url(); ?>admin">
             <i class="fa fa-th"></i> <span>Data User</span>
           </a>
         </li>
@@ -349,7 +349,7 @@
         </li>
 
         <li>
-          <a href="pages/widgets.html">
+          <a href="<?php echo base_url(); ?>c_rute">
             <i class="fa fa-th"></i> <span>Rute</span>
           </a>
         </li>

@@ -1,19 +1,19 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Admin extends CI_Controller {
+class C_rute extends CI_Controller {
 		function __construct() {
 			parent::__construct();
-			$this->load->model('m_crud');
+			$this->load->model('m_rute');
 			$this->load->helper('url');
 		}
 	
 	public function index(){
 			$this->load->database();
-		$jumlah_data = $this->m_crud->jumlah_data();
+		$jumlah_data = $this->m_rute->jumlah_data();
 		$this->load->library('pagination');
 
-		$config['base_url'] = base_url().'index.php/admin/index/';
+		$config['base_url'] = base_url().'index.php/c_rute/index/';
 		$config['total_rows'] = $jumlah_data;
 		$config['per_page'] = 5;
 
@@ -42,48 +42,54 @@ class Admin extends CI_Controller {
 
 		$from = $this->uri->segment(3);
 		$this->pagination->initialize($config);		
-		$data['user'] = $this->m_crud->data($config['per_page'],$from);
-		
+		$data['rute'] = $this->m_rute->data($config['per_page'],$from);
+		$data['transportation'] = $this->m_rute->gettrans();
 
-		$this->load->view('v_headeradmin');
-		$this->load->view('admin', $data);
-		$this->load->view('v_footeradmin');
+		$this->load->view('v_rute', $data);
 		}
 
 	public function tambah(){
 			$op = $this->input->post('op');
 			$id = $this->input->post('id');
-			$username = $this->input->post('username');
-			$fullname = $this->input->post('fullname');
-			$password = $this->input->post('password');
+			$id_trans = $this->input->post('maskapai');
+			$depart_at = $this->input->post('depart_at');
+			$arrive_at = $this->input->post('arrive_at');
+			$rute_from = $this->input->post('from');
+			$rute_to = $this->input->post('to');
+			$price = $this->input->post('price');
+
 			
 			$data = array(
-				'username' => $username,
-				'fullname' => $fullname,
-				'password' => md5($password)
+				'id_transportation' => $id_trans,
+				'depart_at' => $depart_at,
+				'arrive_at' => $arrive_at,
+				'rute_from' => $rute_from,
+				'rute_to' => $rute_to,
+				'price' => $price
 			);
 
 		if($op=="tambah"){
-			$this->m_crud->tambah($data);
+			$this->m_rute->tambah($data);
 		}
 		else{
-			$this->m_crud->update($id,$data);
+			$this->m_rute->update($id,$data);
 		}
 	
-		redirect('admin');
+		redirect('c_rute');
 		}
 
 	public function hapus($id){
-		redirect('admin');
 
-		$this->m_crud->hapus($id);
+		$this->m_rute->hapus($id);
+		redirect('c_rute');
 	}
 
 	public function edit($id){
 		$data['op'] = 'edit';
-		$data['sql'] = $this->m_crud->edit($id);
+		$data['sql'] = $this->m_rute->edit($id);
+		$data['transportation'] = $this->m_rute->gettrans();
 
-		$this->load->view('v_edit',$data);	
+		$this->load->view('v_editrute',$data);	
 	}
 
 
