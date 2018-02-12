@@ -62,7 +62,7 @@
             
           </div> 
           <div class="col-md probootstrap-animate">
-            <form action="<?php echo base_url('admin/tambah_aksi'); ?>" method="post" class="probootstrap-form">
+            <form action="<?php echo base_url('c_transportation/pencarian'); ?>" method="get" class="probootstrap-form">
               <div class="form-group">
                 <div class="row mb-3">
                   <div class="col-md">
@@ -96,14 +96,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md">
-                    <div class="form-group">
-                      <label for="probootstrap-date-arrival">Harga</label>
-                      <div class="probootstrap-date-wrap"> 
-                        <input type="text"  class="form-control" placeholder="" name="price">
-                      </div>
-                    </div>
-                  </div>
+              
                 </div>
 
                 <!-- END row -->

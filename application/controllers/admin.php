@@ -74,9 +74,9 @@ class Admin extends CI_Controller {
 		}
 
 	public function hapus($id){
-		redirect('admin');
 
 		$this->m_crud->hapus($id);
+		redirect('admin');
 	}
 
 	public function edit($id){

@@ -5,14 +5,14 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Data User
+        Reservation
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Dashboard</li>
       </ol>
       
-      <form action="<?php echo base_url(); ?>admin/tambah" method="post">
+      <form action="<?php echo base_url(); ?>c_reservation/tambah" method="post">
               <div class="box-body">
                 <div class="form-group">
 

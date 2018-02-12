@@ -355,7 +355,7 @@
         </li>
 
         <li>
-          <a href="pages/widgets.html">
+          <a href="<?php echo base_url(); ?>c_transportation">
             <i class="fa fa-th"></i> <span>Transportation</span>
           </a>
         </li>

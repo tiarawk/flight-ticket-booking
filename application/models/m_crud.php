@@ -10,7 +10,7 @@ class M_crud extends CI_Model{
     }
 
     function jumlah_data(){
-        return $this->db->get('rute')->num_rows();
+        return $this->db->get('user')->num_rows();
     }
 
     public function hapus($id){
