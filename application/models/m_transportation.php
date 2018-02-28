@@ -43,6 +43,12 @@ class M_transportation extends CI_Model{
         $this->db->like('depart_at',$tgl);
         return $this->db->get('rute')->result();
     }
+
+    public function detail($id){
+
+        $this->db->where('id',$id);
+        return $this->db->get('rute');
+    }
 } 
 
 ?>

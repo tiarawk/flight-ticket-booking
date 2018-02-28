@@ -55,7 +55,7 @@
     <div class="container">
       <div class="row align-items-center">
         <div class="col-md">
-          <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Jelajah Dunia Nikmati Pelayanan Kami </h2>
+          
           <p class="lead mb-5 probootstrap-animate">
 
           </div> 
@@ -65,8 +65,24 @@
         </div>
       </div>
     </section>
-    <div>
-      <div class="row2">
+<?php
+  $depart_at = "";
+  $arrive_at = "";
+  $rute_from = "";
+  $rute_to = "";
+  $price = "";
+
+  foreach($detail->result() as $obj) {
+    
+    $depart_at = $obj->depart_at;
+    $arrive_at = $obj->arrive_at;
+    $rute_from = $obj->rute_from;
+    $rute_to = $obj->rute_to;
+    $price = $obj->price;
+
+  }
+  ?>
+ 	 <div class="row2">
         <div class="col-xs-12">
           <div class="box">
             <!-- /.box-header -->
@@ -79,22 +95,15 @@
                   <th>Arrive</th>
                   <th></th>
                 </tr>
-                <?php
-                $no=0;
-                foreach ($hasil as $obj1) {
-                  $no++; 
-                  ?> 
                   <tr>
 
-                    <td><?php echo $obj1->rute_from; ?></td>  
-                    <td><?php echo $obj1->rute_to; ?></td> 
-                    <td><?php echo $obj1->depart_at; ?></td>
-                    <td><?php echo $obj1->arrive_at; ?></td>  
-                    <td>
-                      <a href="<?php echo base_url(); ?>c_transportation/customer/<?php echo $obj1->id ?>" class="btn btn-primary">Pesan</a>
+                    <td><?php echo $rute_from; ?></td>  
+                    <td><?php echo $rute_to; ?></td> 
+                    <td><?php echo $depart_at; ?></td>
+                    <td><?php echo $arrive_at; ?></td>  
                     </td>
                   </tr>
-                  <?php } ?>
+                  
                 </table>
               </div>
             </div>
@@ -104,37 +113,10 @@
           <!-- /.content -->
         </div>
       </div>
-    </div>
-  </div>
-  <!-- END section -->
+    </div>      
+          <!-- /.box -->
+          <!-- /.content -->
 
+  
 
-
-
-  <footer class="probootstrap_section probootstrap-border-top">
-    <div class="container">
-      <div class="row pt-5">
-        <div class="col-md-12 text-center">
-          <p class="probootstrap_font-14">&copy; 2017. All Rights Reserved. <br> Designed &amp; Developed by <a href="<?php echo base_url(); ?>https://probootstrap.com/" target="_blank">ProBootstrap</a><small> (Don't remove credit link on this footer. See <a href="<?php echo base_url(); ?>https://probootstrap.com/license/">license</a>)</small></p>
-          <p class="probootstrap_font-14">Demo Images: <a href="<?php echo base_url(); ?>https://unsplash.com/" target="_blank">Unsplash</a></p>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-
-  <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
-
-  <script src="<?php echo base_url(); ?>assets/js/popper.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/js/owl.carousel.min.js"></script>
-
-  <script src="<?php echo base_url(); ?>assets/js/bootstrap-datepicker.js"></script>
-  <script src="<?php echo base_url(); ?>assets/js/jquery.waypoints.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/js/jquery.easing.1.3.js"></script>
-
-  <script src="<?php echo base_url(); ?>assets/js/select2.min.js"></script>
-
-  <script src="<?php echo base_url(); ?>assets/js/main.js"></script>
-</body>
-</html>
+<?php require_once 'v_footer.php' ?>

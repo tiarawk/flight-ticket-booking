@@ -103,6 +103,24 @@ class C_transportation extends CI_Controller {
 		$this->load->view('v_pencarian',$data);
 	}
 
+	public function customer($id){
+
+	$data['detail'] = $this->m_transportation->detail($id);
+
+	$this->load->view('v_pesan',$data);
+
+	}
+
+	public function pesan(){
+		$name = $this->input->get('name');
+		$address = $this->input->get('address');
+		$phone = $this->input->get('phone');
+		$gender = $this->input->get('gender');
+		$email = $this->input->get('email');
+
+		
+	}
+
 
 
 	
